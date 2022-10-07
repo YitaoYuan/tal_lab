@@ -45,6 +45,8 @@ void tal_reduce() {
 	struct tal_task_t task;
 	while(!force_quit) {
 		if (task_todo.dequeue(&task) != 0) {
+			//int64_t key = task.key;
+			//如何解决乱序问题？？我看mpi sample的版本没有解决这个问题
 			if(meta.rank == 0) {
 				char *buf = new char[task.bytes];
 				for(int i = 1; i < meta.size; i++) {
